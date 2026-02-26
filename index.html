@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Add News</title>
+</head>
+<body>
+
+<h2>Add News</h2>
+
+<form id="newsForm">
+  <input type="text" id="title" placeholder="Title" required><br><br>
+  <textarea id="content" placeholder="Content" required></textarea><br><br>
+  <input type="text" id="image_url" placeholder="Image URL"><br><br>
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+document.getElementById("newsForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const data = {
+    title: document.getElementById("title").value,
+    content: document.getElementById("content").value,
+    image_url: document.getElementById("image_url").value
+  };
+
+  await fetch("http://localhost:3000/api/news", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data)
+  });
+
+  alert("News Added!");
+});
+</script>
+
+</body>
+</html>
